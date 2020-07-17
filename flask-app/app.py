@@ -1,30 +1,18 @@
-import json
-
 import flask
-from flask import Flask, render_template, g
-import flask_login
-from flask_login import login_required
+from flask import Flask, g
 from flask_oidc import OpenIDConnect
-
-from model.user import User
 
 app = Flask(__name__)
 
-login_manager = flask_login.LoginManager()
-login_manager.init_app(app)
-
-# Our mock database.
-users = {'foo@bar.com': {'pw': 'secret'}}
-
 app.config.update({
-    'SECRET_KEY': 'u\x91\xcf\xfa\x0c\xb9\x95\xe3t\xba2K\x7f\xfd\xca\xa3\x9f\x90\x88\xb8\xee\xa4\xd6\xe4',
+    'SECRET_KEY': 'a12ecbf6-b954-4059-95d3-24a8a4909995',
     'TESTING': True,
     'DEBUG': True,
     'OIDC_CLIENT_SECRETS': 'client_secrets.json',
     'OIDC_ID_TOKEN_COOKIE_SECURE': False,
     'OIDC_REQUIRE_VERIFIED_EMAIL': False,
-    'OIDC_VALID_ISSUERS': ['http://localhost:8080/auth/realms/demo-realm'],
-    'OIDC_OPENID_REALM': 'http://localhost:5000/oidc_callback'
+    'OIDC_VALID_ISSUERS': ['http://keycloak:8080/auth/realms/flask-demo'],
+    'OIDC_OPENID_REALM': 'http://keycloak:5000/oidc_callback'
 })
 oidc = OpenIDConnect(app)
 
@@ -47,10 +35,10 @@ def hello_me():
             (info.get('email'), info.get('openid_id')))
 
 
-@app.route('/api')
-@oidc.accept_token(True, ['openid'])
-def hello_api():
-    return json.dumps({'hello': 'Welcome %s' % g.oidc_token_info['sub']})
+@app.route('/api/user/info')
+@oidc.accept_token(True, ['email', 'profile'])
+def user_info():
+    return flask.jsonify(g.oidc_token_info)
 
 
 @app.route('/logout')
