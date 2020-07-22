@@ -1,3 +1,4 @@
+import os
 import flask
 from flask import Flask, g
 from flask_oidc import OpenIDConnect
@@ -33,6 +34,14 @@ def hello_me():
     info = oidc.user_getinfo(['email', 'openid_id'])
     return ('Hello, %s (%s)! <a href="/">Return</a>' %
             (info.get('email'), info.get('openid_id')))
+
+
+@app.route('/hostname')
+@oidc.accept_token(True, ['email', 'profile'])
+def status():
+    with open('/etc/hostname') as fp:
+        hostname = fp.readline()[:-1]
+    return flask.jsonify({'hostname': hostname})
 
 
 @app.route('/api/user/info')

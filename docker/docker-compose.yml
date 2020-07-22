@@ -32,7 +32,7 @@ services:
         source: keycloak-flask-data
         target: /opt/jboss/keycloak/standalone/data
   flask-app:
-    image: akring1729/flask-app:latest
+    image: akring1729/flask-app:0.1
     container_name: flask-app
     ports:
       - 5000:5000
