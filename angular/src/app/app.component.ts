@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  obj: object;
+  obj: object = {foo: 'hurra'};
 
   objs: object[] = [
     {abc: 'xyz'}
