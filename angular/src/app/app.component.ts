@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,9 @@ export class AppComponent {
 
   constructor(private dataService: DataService) {}
 
-  getData(): object[] {
-    return this.dataService.getData();
+  getData(): Observable<Object> {
+    return this.dataService.getData().subscribe(
+      
+    );
   }
 }
