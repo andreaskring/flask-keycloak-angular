@@ -36,6 +36,11 @@ def hello_me():
             (info.get('email'), info.get('openid_id')))
 
 
+@app.route('/public')
+def public():
+    return flask.jsonify({'foo': 'bar'})
+
+
 @app.route('/hostname')
 @oidc.accept_token(True, ['email', 'profile'])
 def status():

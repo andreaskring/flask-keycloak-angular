@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  objs : object[] = [
+    {abc: 'xyz'}
+  ];
+
+  names: string[] = ["Bruce Lee", "Bob Sacremento"];
+
   title = 'angular';
+
+  constructor(private dataService: DataService) {}
+
+  getData(): object[] {
+    return this.dataService.getData();
+  }
 }
