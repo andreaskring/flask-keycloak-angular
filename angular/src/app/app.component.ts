@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     {abc: 'xyz'}
   ];
 
-  names: string[] = ['Bruce Lee', 'Bob Sacremento'];
+  names: string[] = ['Bruce Lee', 'Bob Sacamento'];
 
   title = 'angular';
 
