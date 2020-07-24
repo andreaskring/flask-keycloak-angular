@@ -1,9 +1,10 @@
-import os
 import flask
 from flask import Flask, g
 from flask_oidc import OpenIDConnect
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.config.update({
     'SECRET_KEY': 'a12ecbf6-b954-4059-95d3-24a8a4909995',
@@ -62,4 +63,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run('localhost', port=5000)
+    app.run(port=5000, host='0.0.0.0')

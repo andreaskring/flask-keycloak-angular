@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from './services/data.service';
 import { Observable } from 'rxjs';
 
@@ -7,21 +7,31 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  objs : object[] = [
+  obj: object;
+
+  objs: object[] = [
     {abc: 'xyz'}
   ];
 
-  names: string[] = ["Bruce Lee", "Bob Sacremento"];
+  names: string[] = ['Bruce Lee', 'Bob Sacremento'];
 
   title = 'angular';
 
+  myObserver = {
+    next: obj => this.obj = obj,
+    error: err => this.obj = {msg: 'error'},
+    complete: () => console.log('Observer got complete')
+  };
+
   constructor(private dataService: DataService) {}
 
-  getData(): Observable<Object> {
-    return this.dataService.getData().subscribe(
-      
-    );
+  ngOnInit() {
+    this.getData();
+  }
+
+  getData(): void {
+    this.dataService.getData().subscribe(this.myObserver);
   }
 }

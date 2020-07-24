@@ -1,4 +1,5 @@
 flask
 flask-oidc
+flask-cors
 gunicorn
 
