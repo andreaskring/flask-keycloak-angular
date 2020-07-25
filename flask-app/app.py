@@ -42,6 +42,13 @@ def public():
     return flask.jsonify({'foo': 'bar'})
 
 
+@app.route('/public/hostname')
+def public_hostname():
+    with open('/etc/hostname') as fp:
+        hostname = fp.readline()[:-1]
+    return flask.jsonify({'hostname': hostname})
+
+
 @app.route('/hostname')
 @oidc.accept_token(True, ['email', 'profile'])
 def status():
