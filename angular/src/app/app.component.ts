@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    console.log(this.obj);
   }
 
   getData(): void {
