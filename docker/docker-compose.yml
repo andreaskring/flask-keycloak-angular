@@ -16,7 +16,7 @@ services:
   keycloak:
     depends_on:
       - postgres
-    image: quay.io/keycloak/keycloak
+    image: quay.io/keycloak/keycloak:11.0.0
     container_name: keycloak
     ports:
       - 8080:8080
