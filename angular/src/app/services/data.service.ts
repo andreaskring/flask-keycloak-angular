@@ -10,12 +10,12 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<Object> {
-    return this.http.get("http://localhost:5000/public")
+  getData(): Observable<object> {
+    return this.http.get('http://localhost:5000/public')
       .pipe(
         tap(_ => console.log(_))
       );
-    
+
       // return [{abc: "lajddlaksd"}];
   }
 }
