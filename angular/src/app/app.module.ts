@@ -12,9 +12,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://keycloak:8080/auth',
+        url: 'http://localhost:8080/auth',
         realm: 'flask-demo',
-        clientId: 'flask',
+        clientId: 'flask'
       },
       initOptions: {
         onLoad: 'check-sso',
